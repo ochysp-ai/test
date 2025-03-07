@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couples Connection: 50 Questions to Grow Together</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f5ff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #b19cd9, #6a5acd);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        
+        .instructions {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .instructions h2 {
+            color: #6a5acd;
+            margin-top: 0;
+        }
+        
+        .question-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 40px 0;
+        }
+        
+        .question-card {
+            background-color: white;
+            width: 100%;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: none;
+        }
+        
+        .question-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-text {
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #6a5acd;
+            margin-bottom: 20px;
+        }
+        
+        .question-category {
+            background-color: #f0ebff;
+            color: #6a5acd;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            background-color: #6a5acd;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(106, 90, 205, 0.3);
+        }
+        
+        button:hover {
+            background-color: #5a4abd;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(106, 90, 205, 0.4);
+        }
+        
+        button:disabled {
+            background-color: #d1d1d1;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .progress {
+            margin-top: 20px;
+            text-align: center;
+            color: #777;
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .category-btn {
+            background-color: #e9e4f5;
+            color: #6a5acd;
+            border: 2px solid transparent;
+        }
+        
+        .category-btn.active {
+            background-color: #6a5acd;
+            color: white;
+        }
+
+        .completion-message {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 40px 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .question-text {
+                font-size: 1.3rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Couples Connection</h1>
+            <div class="subtitle">50 Questions to Grow Together</div>
+        </header>
+        
+        <div class="instructions">
+            <h2>How to Play</h2>
+            <p>Welcome to a journey of connection and discovery! This game contains 50 carefully crafted questions ranging from light-hearted fun to meaningful depth. Here's how to play:</p>
+            <ol>
+                <li>Take turns answering each question.</li>
+                <li>Listen actively when your partner speaks.</li>
+                <li>Be honest and open with your answers.</li>
+                <li>Remember, there are no right or wrong answers.</li>
+                <li>If a question feels too intense, feel free to skip it and come back later.</li>
+                <li>Use the category filters to focus on specific types of questions.</li>
+            </ol>
+            <p>The goal is to have fun while deepening your connection. Enjoy the journey together!</p>
+        </div>
+        
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All Questions</button>
+            <button class="category-btn" data-category="fun">Fun & Playful</button>
+            <button class="category-btn" data-category="past">Past & Memories</button>
+            <button class="category-btn" data-category="values">Values & Beliefs</button>
+            <button class="category-btn" data-category="dreams">Dreams & Future</button>
+            <button class="category-btn" data-category="intimacy">Intimacy & Connection</button>
+        </div>
+        
+        <div class="question-container">
+            <div class="question-card active" data-category="fun" data-index="1">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If we had a theme song as a couple, what would it be and why?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="2">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What was your first impression of me, and how has it changed over our four months together?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="3">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If we could teleport anywhere for a day-long date right now, where would you choose and what would we do?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="4">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">What's one value or principle you absolutely would not compromise on in a relationship?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="5">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">When do you feel most connected to me?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="6">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">What's a personal goal you're working toward right now that I might be able to support you with?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="7">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If we were fictional characters in a TV show or movie, who would we be and why?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="8">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What's your favorite memory of us so far in these four months?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="9">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">What does trust mean to you in a relationship?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="10">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's something I do that makes you feel especially loved or appreciated?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="11">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If you could give us a silly couple nickname, what would it be?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="12">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">What's one adventure or experience you'd love for us to share together someday?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="13">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What's one lesson from a previous relationship that you've brought into ours?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="14">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">When was a moment you felt truly understood by me?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="15">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If we started a business together, what would it be?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="16">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">How important is having personal space and independence to you in a relationship?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="17">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">Where do you see yourself in five years, and how might I fit into that vision?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="18">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">What's the weirdest thing you find attractive about me?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="19">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's something you've been afraid to tell me, but want me to know?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="20">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">How do you prefer to resolve conflicts? Do you need space first, or do you like to address issues immediately?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="21">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What's one moment in these past four months where you thought, 'I really like this person'?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="22">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If we were stuck in an elevator for three hours, how would we keep each other entertained?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="23">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">What's one place you've never been that you'd love for us to visit together?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="24">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's one way I could better support you when you're feeling down?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="25">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">How important is family to you, and how do you envision integrating our families as our relationship grows?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="26">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">What fictional world would you want us to live in together?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="27">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What's something from your childhood that shaped who you are today that you'd like me to understand better?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="28">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">If we moved in together someday, what's one thing you'd want our home to have or be like?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="29">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What makes you feel most vulnerable in our relationship?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="30">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If you could have me develop one superpower, what would it be and why?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="31">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">What role does spirituality or faith play in your life, if any?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="32">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">What's one skill or hobby you'd like us to learn together?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="33">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What was something unexpected about me that pleasantly surprised you?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="34">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's one thing I do that makes you feel especially desired?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="35">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If we were to create a bucket list of 3 fun activities to do together this year, what would be on it?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="36">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">How do you define success in life, and has that definition changed over time?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="37">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">What kind of lifestyle do you hope to have in the future?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="38">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What's a personal challenge you've overcome that you're proud of?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="39">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's one thing you wish I knew about you without you having to tell me?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="40">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">If we switched lives for a day, what would you be most excited to experience and what would you dread?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="41">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">How do you feel about social media and sharing our relationship online?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="42">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's your love language, and how can I better express love in a way that resonates with you?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="43">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">If money were no object, how would you want us to spend our time together?</div>
+            </div>
+            
+            <div class="question-card" data-category="past" data-index="44">
+                <div class="question-category">Past & Memories</div>
+                <div class="question-text">What's a tradition from your family or childhood that you'd like to continue or share with me?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="45">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">How important is personal growth to you, and how do you hope we might grow together?</div>
+            </div>
+            
+            <div class="question-card" data-category="fun" data-index="46">
+                <div class="question-category">Fun & Playful</div>
+                <div class="question-text">What three songs would you put on the soundtrack of our relationship so far?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="47">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's something challenging you're currently dealing with that I might not fully realize?</div>
+            </div>
+            
+            <div class="question-card" data-category="dreams" data-index="48">
+                <div class="question-category">Dreams & Future</div>
+                <div class="question-text">What are you most looking forward to in our relationship as we continue growing together?</div>
+            </div>
+            
+            <div class="question-card" data-category="values" data-index="49">
+                <div class="question-category">Values & Beliefs</div>
+                <div class="question-text">What does a healthy relationship look like to you?</div>
+            </div>
+            
+            <div class="question-card" data-category="intimacy" data-index="50">
+                <div class="question-category">Intimacy & Connection</div>
+                <div class="question-text">What's something you want to tell me, but haven't found the right moment for yet?</div>
+            </div>
+            
+            <div class="completion-message">
+                <h2>You've completed all the questions! 🎉</h2>
+                <p>We hope these questions helped you learn more about each other and deepen your connection.</p>
+                <p>Feel free to start over or revisit specific categories of questions.</p>
+                <button id="restart-btn">Start Over</button>
+            </div>
+            
+            <div class="controls">
+                <button id="prev-btn" disabled>Previous</button>
+                <button id="next-btn">Next</button>
+            </div>
+            
+            <div class="progress">
+                Question <span id="current-question">1</span> of <span id="total-questions">50</span>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Created with love, for growing together. May your connection continue to deepen and flourish.</p>
+        </footer>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const questionCards = document.querySelectorAll('.question-card');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const currentQuestionSpan = document.getElementById('current-question');
+            const totalQuestionsSpan = document.getElementById('total-questions');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const completionMessage = document.querySelector('.completion-message');
+            const restartBtn = document.getElementById('restart-btn');
+            
+            let currentIndex = 0;
+            let filteredQuestions = Array.from(questionCards);
+            
+            // Initialize
+            updateTotalQuestions();
+            showCurrentQuestion();
+            
+            // Event listeners
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Toggle active class
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter questions
+                    const category = this.dataset.category;
+                    filterQuestions(category);
+                });
+            });
+            
+            restartBtn.addEventListener('click', function() {
+                currentIndex = 0;
+                completionMessage.style.display = 'none';
+                filterQuestions(document.querySelector('.category-btn.active').dataset.category);
+            });
+            
+            function showCurrentQuestion() {
+                // Hide all questions
+                questionCards.forEach(card => {
+                    card.classList.remove('active');
+                });
+                
+                // Show current question if available
+                if (filteredQuestions.length > 0) {
+                    if (currentIndex >= filteredQuestions.length) {
+                        // Show completion message
+                        completionMessage.style.display = 'block';
+                        return;
+                    }
+                    
+                    filteredQuestions[currentIndex].classList.add('active');
+                    currentQuestionSpan.textContent = currentIndex + 1;
+                    
+                    // Update button states
+                    prevBtn.disabled = currentIndex === 0;
+                    nextBtn.disabled = currentIndex === filteredQuestions.length - 1;
+                } else {
+                    // No questions match the filter
+                    currentQuestionSpan.textContent = '0';
+                    prevBtn.disabled = true;
+                    nextBtn.disabled = true;
+                }
+            }
+            
+            function showNextQuestion() {
+                if (currentIndex < filteredQuestions.length - 1) {
+                    currentIndex++;
+                    showCurrentQuestion();
+                } else {
+                    // Show completion message
+                    completionMessage.style.display = 'block';
+                    filteredQuestions.forEach(card => {
+                        card.classList.remove('active');
+                    });
+                }
+            }
+            
+            function showPreviousQuestion() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    completionMessage.style.display = 'none';
+                    showCurrentQuestion();
+                }
+            }
+            
+            function filterQuestions(category) {
+                if (category === 'all') {
+                    filteredQuestions = Array.from(questionCards);
+                } else {
+                    filteredQuestions = Array.from(questionCards).filter(card => 
+                        card.dataset.category === category
+                    );
+                }
+                
+                currentIndex = 0;
+                completionMessage.style.display = 'none';
+                updateTotalQuestions();
+                showCurrentQuestion();
+            }
+            
+            function updateTotalQuestions() {
+                totalQuestionsSpan.textContent = filteredQuestions.length;
+            }
+        });
+    </script>
+</body>
+</html>
